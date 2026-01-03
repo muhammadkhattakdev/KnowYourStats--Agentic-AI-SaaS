@@ -1,39 +1,33 @@
 """
-Django settings for knowyourstats project.
+Django settings for server project.
 """
 
 from pathlib import Path
 from datetime import timedelta
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-your-secret-key-here-change-in-production'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# Application definition
 INSTALLED_APPS = [
-    'daphne',  # Must be before django.contrib.staticfiles
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    # Third party apps
+
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
     'channels',
-    
-    # Local apps
+
     'accounts',
     'chat',
     'reports',
@@ -43,7 +37,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Must be before CommonMiddleware
+    'corsheaders.middleware.CorsMiddleware',  
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -52,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'knowyourstats.urls'
+ROOT_URLCONF = 'server.urls'
 
 TEMPLATES = [
     {
@@ -70,8 +64,8 @@ TEMPLATES = [
     },
 ]
 
-# ASGI Application for WebSockets
-ASGI_APPLICATION = 'knowyourstats.asgi.application'
+# ASGI Application for WebSockets -- deactivated WSGI 
+ASGI_APPLICATION = 'server.asgi.application'
 
 # Database
 DATABASES = {
@@ -110,14 +104,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -145,7 +136,6 @@ SIMPLE_JWT = {
     'USER_ID_CLAIM': 'user_id',
 }
 
-# CORS Settings
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vite default port
     "http://localhost:3000",
@@ -155,7 +145,6 @@ CORS_ALLOWED_ORIGINS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-# Channels Configuration
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -165,7 +154,6 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Celery Configuration
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
@@ -173,16 +161,13 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 
-# FAISS Configuration
 FAISS_INDEX_PATH = BASE_DIR / 'faiss_indices'
 os.makedirs(FAISS_INDEX_PATH, exist_ok=True)
 
-# AI Agent Configuration
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')  # Set in environment
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', '')  # Set in environment
 DEFAULT_LLM_MODEL = 'claude-sonnet-4-20250514'  # or 'gpt-4'
 MAX_AGENT_ITERATIONS = 10
 
-# File Upload Settings
 MAX_UPLOAD_SIZE = 50 * 1024 * 1024  # 50MB
 ALLOWED_UPLOAD_EXTENSIONS = ['.csv', '.xlsx', '.xls']
