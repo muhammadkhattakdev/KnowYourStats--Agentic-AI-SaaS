@@ -1,7 +1,3 @@
-"""
-Agentic AI Core - The brain of our autonomous data analysis agent
-"""
-
 import json
 import anthropic
 from typing import List, Dict, Any, Optional
