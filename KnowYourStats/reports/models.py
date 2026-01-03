@@ -18,6 +18,7 @@ class Report(models.Model):
         on_delete=models.CASCADE,
         related_name='reports'
     )
+
     chat_session = models.ForeignKey(
         'chat.ChatSession',
         on_delete=models.CASCADE,
