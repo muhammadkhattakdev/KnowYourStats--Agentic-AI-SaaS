@@ -18,7 +18,7 @@ class AgenticAI:
         self.reasoning_trace = []
         self.tools_used = []
         self.findings = {}
-        
+
     def run(self) -> Dict[str, Any]:
         """
         Main agentic loop - agent decides what to investigate and how
