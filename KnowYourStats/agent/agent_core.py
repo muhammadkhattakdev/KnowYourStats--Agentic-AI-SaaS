@@ -9,7 +9,7 @@ class AgenticAI:
     Agentic AI that autonomously analyzes data, makes decisions,
     and generates comprehensive reports through iterative reasoning
     """
-    
+
     def __init__(self, user_query: str, dataset_context: Optional[Dict] = None):
         self.user_query = user_query
         self.dataset_context = dataset_context or {}

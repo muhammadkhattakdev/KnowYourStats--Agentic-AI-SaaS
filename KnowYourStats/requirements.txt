@@ -1,0 +1,34 @@
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+
+channels
+channels-redis
+daphne
+
+celery
+redis
+
+# Database
+psycopg2-binary
+
+# AI/ML Libraries
+anthropic
+openai
+
+# Data Processing
+pandas
+numpy
+openpyxl
+xlrd
+
+
+faiss-cpu
+
+python-dotenv
+Pillow
+python-magic
+
+ipython
+black
+flake8
